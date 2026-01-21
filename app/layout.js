@@ -3,7 +3,11 @@ import Navigation from "./_components/navigation";
 import "@/app/_styles/globals.css";
 
 export const metadata = {
-  title: "First Next.js app",
+  title: {
+    template: "%s | Cozy Cabins",
+    default: "Cozy Cabins",
+  },
+  description: "Discover and book your perfect cabin getaway.",
 };
 
 export default function RootLayout({ children }) {
