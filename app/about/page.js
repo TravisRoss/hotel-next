@@ -1,6 +1,5 @@
 import Image from "next/image";
 import image1 from "/public/about-1.jpg";
-import image2 from "/public/about-2.jpg";
 
 export const metadata = {
   title: "About",
@@ -68,7 +67,7 @@ export default function Page() {
           <p>
             Over the years, we&apos;ve maintained the essence of The Wild Oasis,
             blending the timeless beauty of the mountains with the personal
-            touch only a family business can offer. Here, you're not just a
+            touch only a family business can offer. Here, you&apos;re not just a
             guest; you&apos;re part of our extended family. So join us at The Wild
             Oasis soon, where tradition meets tranquility, and every visit is
             like coming home.

@@ -1,5 +1,3 @@
-import Navigation from "./_components/navigation";
-
 import "@/app/_styles/globals.css";
 import { Josefin_Sans } from "next/font/google";
 import Header from "./_components/Header";

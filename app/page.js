@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import bg from "/public/bg.png";
-
+import bg from "./public/bg.png";
 export default function Page() {
   return (
     <main className="mt-24">
