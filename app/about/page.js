@@ -1,5 +1,5 @@
 import Image from "next/image";
-import image1 from "/public/about-1.jpg";
+import image1 from "../public/about-1.jpg";
 
 export const metadata = {
   title: "About",
@@ -17,9 +17,9 @@ export default function Page() {
           <p>
             Where nature&apos;s beauty and comfortable living blend seamlessly.
             Hidden away in the heart of the Italian Dolomites, this is your
-            paradise away from home. But it&apos;s not just about the luxury cabins.
-            It&apos;s about the experience of reconnecting with nature and enjoying
-            simple pleasures with family.
+            paradise away from home. But it&apos;s not just about the luxury
+            cabins. It&apos;s about the experience of reconnecting with nature
+            and enjoying simple pleasures with family.
           </p>
           <p>
             Our 8 luxury cabins provide a cozy base, but the real freedom and
@@ -68,9 +68,9 @@ export default function Page() {
             Over the years, we&apos;ve maintained the essence of The Wild Oasis,
             blending the timeless beauty of the mountains with the personal
             touch only a family business can offer. Here, you&apos;re not just a
-            guest; you&apos;re part of our extended family. So join us at The Wild
-            Oasis soon, where tradition meets tranquility, and every visit is
-            like coming home.
+            guest; you&apos;re part of our extended family. So join us at The
+            Wild Oasis soon, where tradition meets tranquility, and every visit
+            is like coming home.
           </p>
 
           <div>
