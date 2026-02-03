@@ -9,3 +9,26 @@ export default function Navigation() {
             href="/cabins"
             className="hover:text-accent-400 transition-colors"
           >
+            Cabins
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/about"
+            className="hover:text-accent-400 transition-colors"
+          >
+            About
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/account"
+            className="hover:text-accent-400 transition-colors"
+          >
+            Guest area
+          </Link>
+        </li>
+      </ul>
+    </nav>
+  );
+}
