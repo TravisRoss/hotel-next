@@ -1,15 +1,24 @@
-export default function Page() {
-  // CHANGE
-  const reservationId = 23;
-  const maxCapacity = 23;
+import SubmitButton from "@/app/_components/SubmitButton";
+import { updateReservationAction } from "@/app/_lib/actions";
+import { getBooking } from "@/app/_lib/data-service";
+import { Input } from "postcss";
+
+export default async function Page({ params }) {
+  const { bookingId } = params;
+  const { numGuests, observations, cabinId } = await getBooking(bookingId);
+  const { maxCapacity } = await getCabin(cabinId);
 
   return (
     <div>
       <h2 className="font-semibold text-2xl text-accent-400 mb-7">
-        Edit Reservation #{reservationId}
+        Edit Reservation #{bookingId}
       </h2>
 
-      <form className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col">
+      <form
+        action={updateReservationAction}
+        className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col"
+      >
+        <Input type="hidden" name="bookingId" value={bookingId} />
         <div className="space-y-2">
           <label htmlFor="numGuests">How many guests?</label>
           <select
@@ -17,6 +26,7 @@ export default function Page() {
             id="numGuests"
             className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
             required
+            defaultValue={numGuests}
           >
             <option value="" key="">
               Select number of guests...
@@ -36,13 +46,14 @@ export default function Page() {
           <textarea
             name="observations"
             className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
+            defaultValue={observations}
           />
         </div>
 
         <div className="flex justify-end items-center gap-6">
-          <button className="bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300">
+          <SubmitButton pendingLabel="Updating reservation...">
             Update reservation
-          </button>
+          </SubmitButton>
         </div>
       </form>
     </div>

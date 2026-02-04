@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { signIn, signOut } from "./auth";
 import { supabase } from "./supabase-client";
+import { redirect } from "next/navigation";
 
 export async function updateGuest(formData) {
   const session = await auth();
@@ -31,6 +32,35 @@ export async function updateGuest(formData) {
   }
 
   revalidatePath("/account/profile");
+}
+
+export async function updateReservationAction(formData) {
+  const session = await auth();
+  if (!session) {
+    throw new Error("Not authenticated");
+  }
+
+  const bookingId = Number(formData.get("bookingId"));
+  const guestBookings = await getBookings(session.user.guestId);
+  const bookingIds = guestBookings.map((booking) => booking.id);
+
+  if (!bookingIds.includes(bookingId)) {
+    throw new Error("You don't have permission to update this booking");
+  }
+
+  const numGuests = parseInt(formData.get("numGuests"));
+  const observations = formData.get("observations").slice(0, 500); // max 500 chars
+
+  const { error } = await supabase
+    .from("bookings")
+    .update({ numGuests, observations })
+    .eq("id", bookingId);
+  if (error) {
+    throw new Error("failed to update booking");
+  }
+  revalidatePath("/account/reservations");
+  revalidatePath(`/account/reservations/edit/${bookingId}`);
+  redirect("/account/reservations");
 }
 
 export async function signInAction() {
