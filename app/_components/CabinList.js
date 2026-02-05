@@ -1,8 +1,7 @@
-const { getCabins } = require("../_lib/data-service");
+import { getCabins } from "../_lib/data-service";
 import CabinCard from "./CabinCard";
-import { unstable_noStore as no_store } from "next/cache";
 
-async function CabinList() {
+async function CabinList({ filter }) {
   //   no_store();
   const cabins = await getCabins();
 

@@ -1,3 +1,5 @@
+"use client";
+
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { revalidatePath } from "next/cache";
 import { supabase } from "../_lib/supabase-client";

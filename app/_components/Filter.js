@@ -1,6 +1,8 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 function Filter() {
   const searchParams = useSearchParams();
@@ -33,4 +35,3 @@ function Button({ onClick, children }) {
 }
 
 export default Filter;
-className = "border border-primary-800 flex";
