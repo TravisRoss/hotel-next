@@ -1,5 +1,7 @@
+// create context for reservation
 const ReservationContext = createContext();
 
+// create provider for reservation context
 export function ReservationProvider({ children }) {
   const [range, setRange] = useState({ from: undefined, to: undefined });
   const resetRange = () => setRange({ from: undefined, to: undefined });

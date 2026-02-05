@@ -63,6 +63,60 @@ export async function updateReservationAction(formData) {
   redirect("/account/reservations");
 }
 
+export async function createBooking(bookingData, formData) {
+  const session = await auth();
+  if (!session) {
+    throw new Error("Not authenticated");
+  }
+
+  Object.entries(bookingData);
+
+  const newBooking = {
+    ...bookingData,
+    guestId: session.user.guestId,
+    numGuests: parseInt(formData.get("numGuests")),
+    observations: formData.get("observations").slice(0, 500), // max 500 chars
+    extrasPrice: 0, // for simplicity, we won't calculate extras price in this example
+    totalPrice: bookingData.cabinPrice, // in a real app, you'd want to calculate this based on extras
+    isPaid: false,
+    hasBreakfast: false,
+    status: "unconfirmed",
+  };
+
+  const { error } = await supabase.from("bookings").insert([newBooking]);
+
+  if (error) {
+    throw new Error("Booking could not be created");
+  }
+
+  revalidatePath(`/cabins/${bookingData.cabinId}`);
+
+  redirect("/cabins/thankyou");
+}
+
+export async function deleteBooking({ bookingId }) {
+  const session = await auth();
+  if (!session) {
+    throw new Error("Not authenticated");
+  }
+
+  const guestBookings = await getBookings(session.user.guestId);
+  const bookingIds = guestBookings.map((booking) => booking.id);
+
+  if (!bookingIds.includes(bookingId)) {
+    throw new Error("You don't have permission to delete this booking");
+  }
+
+  const { error } = await supabase
+    .from("bookings")
+    .delete()
+    .eq("id", bookingId);
+  if (error) {
+    throw new Error("Booking could not be deleted");
+  }
+  revalidatePath("/account/reservations");
+}
+
 export async function signInAction() {
   await signIn("google", { redirectTo: "/account" });
 }
